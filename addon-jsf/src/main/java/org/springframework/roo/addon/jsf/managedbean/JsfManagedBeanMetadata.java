@@ -1403,11 +1403,12 @@ public class JsfManagedBeanMetadata extends
                                     MANY_TO_MANY)) {
                         bodyBuilder.appendFormalLine(htmlOutputTextStr);
                         bodyBuilder.appendFormalLine(componentIdStr);
-                        bodyBuilder
+                        bodyBuilder.appendFormalLine(fieldValueId + ".setValue(\" \");");
+                        /*bodyBuilder
                                 .appendFormalLine(fieldValueId
                                         + ".setValue(\"This relationship is managed from the "
                                         + parameterTypeSimpleTypeName
-                                        + " side\");");
+                                        + " side\");"); */
                     }
                     else {
                         final JavaType converterType = new JavaType(destination
