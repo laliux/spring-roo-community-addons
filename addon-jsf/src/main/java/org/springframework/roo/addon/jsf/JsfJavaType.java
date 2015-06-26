@@ -76,9 +76,11 @@ public class JsfJavaType {
     public static final JavaType PRIMEFACES_KEYBOARD = new JavaType(
             "org.primefaces.component.keyboard.Keyboard");
     public static final JavaType PRIMEFACES_MENU_ITEM = new JavaType(
-            "org.primefaces.component.menuitem.MenuItem");
+            //"org.primefaces.component.menuitem.MenuItem");
+            "org.primefaces.model.menu.DefaultMenuItem");
     public static final JavaType PRIMEFACES_MENU_MODEL = new JavaType(
-            "org.primefaces.model.MenuModel");
+            //"org.primefaces.model.MenuModel");
+            "org.primefaces.model.menu.DefaultMenuModel");
     public static final JavaType PRIMEFACES_MESSAGE = new JavaType(
             "org.primefaces.component.message.Message");
     public static final JavaType PRIMEFACES_OUTPUT_LABEL = new JavaType(
@@ -98,7 +100,8 @@ public class JsfJavaType {
     public static final JavaType PRIMEFACES_STREAMED_CONTENT = new JavaType(
             "org.primefaces.model.StreamedContent");
     public static final JavaType PRIMEFACES_SUB_MENU = new JavaType(
-            "org.primefaces.component.submenu.Submenu");
+            //"org.primefaces.component.submenu.Submenu");
+            "org.primefaces.model.menu.DefaultSubMenu");
     public static final JavaType PRIMEFACES_UPLOADED_FILE = new JavaType(
             "org.primefaces.model.UploadedFile");
     public static final JavaType REGEX_VALIDATOR = new JavaType(
