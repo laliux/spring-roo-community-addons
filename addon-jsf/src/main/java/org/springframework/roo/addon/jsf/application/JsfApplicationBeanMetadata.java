@@ -164,8 +164,8 @@ public class JsfApplicationBeanMetadata extends
         bodyBuilder.appendFormalLine("");
 
         bodyBuilder.appendFormalLine("menuModel = new DefaultMenuModel();");
-        bodyBuilder.appendFormalLine("Submenu submenu;");
-        bodyBuilder.appendFormalLine("MenuItem item;");
+        bodyBuilder.appendFormalLine("DefaultSubMenu submenu;");
+        bodyBuilder.appendFormalLine("DefaultMenuItem item;");
 
         for (final ClassOrInterfaceTypeDetails managedBean : managedBeans) {
             final AnnotationMetadata annotation = MemberFindingUtils
@@ -195,24 +195,33 @@ public class JsfApplicationBeanMetadata extends
             final String beanName = (String) beanNameAttributeValue.getValue();
 
             bodyBuilder.appendFormalLine("");
-            bodyBuilder.appendFormalLine("submenu = new Submenu();");
+            bodyBuilder.appendFormalLine("submenu = new DefaultSubMenu();");
             bodyBuilder.appendFormalLine("submenu.setId(\""
                     + StringUtils.uncapitalize(entity.getSimpleTypeName())
                     + "Submenu\");");
             bodyBuilder.appendFormalLine("submenu.setLabel(\"" + entityLabel
                     + "\");");
 
-            bodyBuilder.appendFormalLine("item = new MenuItem();");
+            bodyBuilder.appendFormalLine("item = new DefaultMenuItem();");
             bodyBuilder.appendFormalLine("item.setId(\"create"
                     + entity.getSimpleTypeName() + "MenuItem\");");
-            bodyBuilder
-                    .appendFormalLine("item.setValueExpression(\"value\", expressionFactory.createValueExpression(elContext, \"#{messages.label_create}\", String.class));");
-            bodyBuilder
+            
+            //ValueExpression ve = expressionFactory.createValueExpression(elContext, "#{messages.label_create}", String.class);
+            //String text = (String) ve.getValue(elContext);
+            bodyBuilder.appendFormalLine("item.setValue(text)");
+            
+            /*bodyBuilder
+                    .appendFormalLine("item.setValueExpression(\"value\", expressionFactory.createValueExpression(elContext, \"#{messages.label_create}\", String.class));");*/
+            
+            
+            /*bodyBuilder
                     .appendFormalLine("item.setActionExpression(expressionFactory.createMethodExpression(elContext, \"#{"
                             + beanName
                             + "."
                             + DISPLAY_CREATE_DIALOG
-                            + "}\", String.class, new Class[0]));");
+                            + "}\", String.class, new Class[0]));"); */
+            
+            bodyBuilder.appendFormalLine("item.setCommand(\"#{" + beanName + "." + DISPLAY_CREATE_DIALOG + "}\"");
             bodyBuilder.appendFormalLine("item.setIcon(\"" + CREATE_ICON
                     + "\");");
             bodyBuilder.appendFormalLine("item.setAjax(false);");
@@ -220,7 +229,7 @@ public class JsfApplicationBeanMetadata extends
             bodyBuilder.appendFormalLine("item.setUpdate(\":dataForm:data\");");
             bodyBuilder.appendFormalLine("submenu.getChildren().add(item);");
 
-            bodyBuilder.appendFormalLine("item = new MenuItem();");
+            bodyBuilder.appendFormalLine("item = new DefaultMenuItem();");
             bodyBuilder.appendFormalLine("item.setId(\"list"
                     + entity.getSimpleTypeName() + "MenuItem\");");
             bodyBuilder
@@ -236,9 +245,11 @@ public class JsfApplicationBeanMetadata extends
             bodyBuilder.appendFormalLine("item.setAjax(false);");
             bodyBuilder.appendFormalLine("item.setAsync(false);");
             bodyBuilder.appendFormalLine("item.setUpdate(\":dataForm:data\");");
-            bodyBuilder.appendFormalLine("submenu.getChildren().add(item);");
+            //bodyBuilder.appendFormalLine("submenu.getChildren().add(item);");
+            bodyBuilder.appendFormalLine("submenu.addElement(item);");
 
-            bodyBuilder.appendFormalLine("menuModel.addSubmenu(submenu);");
+            //bodyBuilder.appendFormalLine("menuModel.addSubmenu(submenu);");
+            bodyBuilder.appendFormalLine("menuModel.addElement(submenu);");
         }
 
         final MethodMetadataBuilder methodBuilder = new MethodMetadataBuilder(
