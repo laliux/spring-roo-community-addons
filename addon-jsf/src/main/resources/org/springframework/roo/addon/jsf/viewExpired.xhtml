@@ -8,7 +8,6 @@
 <f:view locale="#{localeBean.locale}" contentType="text/html">
   <h:head>
     <title>#{applicationBean.appName}</title>
-    <h:outputStylesheet library="css" name="standard.css" />
   </h:head>
   <h:body>
     <h:panelGrid cellspacing="0" cellpadding="0" styleClass="wrapper">
@@ -32,6 +31,11 @@
         </h:panelGrid>
       </h:panelGrid>
     </h:panelGrid>
+      
+    <f:facet name="last">
+	<h:outputStylesheet library="css" name="style.css" />
+    </f:facet>
+      
   </h:body>
 </f:view>
 </html>
